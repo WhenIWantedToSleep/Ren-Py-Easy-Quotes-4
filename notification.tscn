@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=3 uid="uid://dqkushgfwjwtf"]
+
+[ext_resource type="Theme" uid="uid://c1bv2wbiqbcyq" path="res://theme.tres" id="1_52u2t"]
+[ext_resource type="Script" path="res://notification.gd" id="1_o0a0i"]
+
+[sub_resource type="Animation" id="Animation_l0s33"]
+resource_name = "notification"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-500, 460), Vector2(0, 460)]
+}
+
+[sub_resource type="Animation" id="Animation_ig1c1"]
+resource_name = "notification_backwards"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 460), Vector2(-500, 460)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wqg6d"]
+_data = {
+"notification": SubResource("Animation_l0s33"),
+"notification_backwards": SubResource("Animation_ig1c1")
+}
+
+[node name="notification" type="PanelContainer"]
+offset_left = -500.0
+offset_top = 460.0
+offset_right = -424.0
+offset_bottom = 483.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_52u2t")
+script = ExtResource("1_o0a0i")
+
+[node name="MC" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_right = 10
+
+[node name="text" type="Label" parent="MC"]
+layout_mode = 2
+text = "text"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_wqg6d")
+}
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
