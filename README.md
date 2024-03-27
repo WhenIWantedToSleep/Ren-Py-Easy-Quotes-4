@@ -1,8 +1,7 @@
 # Ren-Py-Easy-Quotes-4
-Program is designed to highlight replicas with quotation marks in scripts (.rpy files) of the engine for visual novels Ren'Py. The program supports Russian and English languages.
 
 # ENG
-The program is designed to insert quotation marks in phrases inside Ren'Py scripts (*.rpy files).
+Program is designed to insert quotation marks in phrases inside Ren'Py scripts (*.rpy files).
 
 You need to select file (or files) in which you want to insert quotes, output folder and input character variables that shouldn't be highlighted (e "Hello, World!": in this case, the variable is "e").
 
